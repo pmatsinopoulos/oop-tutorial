@@ -12,13 +12,13 @@ class Point
 end
 
 class Shape
-  attr_accessor :name
-  def initialize(name)
-    @name = name
+  attr_accessor :color
+  def initialize(color)
+    @color = color
   end
   
   def draw
-    puts "I am #{self.class.name}, my name is #{name} and I am drawing myself"
+    puts "I am #{self.class.name}, my color is #{color} and I am drawing myself"
   end
   
   def area
@@ -28,8 +28,8 @@ end
  
 class Rectangle < Shape
   attr_accessor :top_left, :bottom_right
-  def initialize(name, top_left, bottom_right)
-    super name
+  def initialize(color, top_left, bottom_right)
+    super color
     @top_left = top_left
     @bottom_right = bottom_right
   end
@@ -58,8 +58,8 @@ end
   
 class Square < Rectangle
   attr_accessor :side_width
-  def initialize(name, top_left, side_width)
-    @name = name
+  def initialize(color, top_left, side_width)
+    @color = color
     @top_left = top_left
     @side_width = side_width
   end
@@ -71,8 +71,8 @@ end
  
 class Circle < Shape
   attr_accessor :center, :radius  
-  def initialize(name, center, radius)
-    super name
+  def initialize(color, center, radius)
+    super color
     @center = center
     @radius = radius
   end
@@ -89,7 +89,7 @@ end
 
 class Canvas < Rectangle
   attr_reader :shapes
-  def initialize (name, top_left, bottom_right)
+  def initialize (color, top_left, bottom_right)
     super
     @shapes = []
   end
@@ -107,12 +107,18 @@ class Canvas < Rectangle
       shape.draw
     end
   end  
+  
+  def print_all_areas
+    shapes.each do |s|
+      puts "Shape #{s.color} area is #{s.area}"
+    end
+  end
 end
 
-rectangle = Rectangle.new 'my rect', Point.new(10, 20), Point.new(15, 10)
-square = Square.new 'my sqr', Point.new(10, 30), 15
-circle = Circle.new 'my circle', Point.new(15, 25), 25
-canvas = Canvas.new 'my canvas', Point.new(0, 50), Point.new(100, 0)
+rectangle = Rectangle.new 'Red', Point.new(10, 20), Point.new(15, 10)
+square = Square.new 'Green', Point.new(10, 30), 15
+circle = Circle.new 'Blue', Point.new(15, 25), 25
+canvas = Canvas.new 'Black', Point.new(0, 50), Point.new(100, 0)
 
 canvas.add_shape(rectangle)
 canvas.add_shape(square)
@@ -120,20 +126,13 @@ canvas.add_shape(circle)
 
 canvas.draw
 
-# print all areas:
-canvas.shapes.each do |s|
-  puts "Shape #{s.name} area is #{s.area}"
-end
+canvas.print_all_areas
 
-puts "Removing #{square.name}...."
+puts "Removing #{square.color}...."
 
 canvas.remove_shape(square)
 
 canvas.draw
 
-# print all areas:
-canvas.shapes.each do |s|
-  puts "Shape #{s.name} area is #{s.area}"
-end
-
+canvas.print_all_areas
 
