@@ -43,6 +43,7 @@ class Rectangle < Shape
     puts "...I will draw a line from #{top_left.x},#{top_left.y} to #{bottom_right.x},#{top_left.y}"
     puts "...then I will draw a line from #{bottom_right.x},#{top_left.y} to #{bottom_right.x},#{bottom_right.y}"
     puts "...then I will draw a line from #{bottom_right.x},#{bottom_right.y} to #{top_left.x},#{bottom_right.y}"
+    puts "...then I will draw a line from #{top_left.x},#{bottom_right.y} to #{top_left.x},#{top_left.y}"
   end 
   
   protected
